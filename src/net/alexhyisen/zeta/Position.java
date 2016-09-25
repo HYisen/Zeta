@@ -19,12 +19,21 @@ class Position {
         //using deep copy to allow multiple use of source
     }
 
+    //if the limit is't defined, will throw UnsupportedOperationException where it's needed
+    public Position(int[] value) {
+        this.value = value.clone();
+        limit=null;
+    }
+
     public Position getCopy(){
         return new Position(value.clone(),
                 limit.clone());
     }
 
     private int change(int axis, int step){
+        if(limit==null){
+            throw new UnsupportedOperationException();
+        }
         int result=value[axis];
         result+=step;
         while(result>limit[axis]){
@@ -36,7 +45,7 @@ class Position {
         return result;
     }
 
-    public Position move(int axis, int step){
+    public Position move(int axis, int step) {
         value[axis]=change(axis,step);
         return this;
     }
@@ -58,7 +67,7 @@ class Position {
             rtn+=value[k];
         }
         rtn+=")";
-        return getClass().getSimpleName()+rtn;
+        return rtn;
     }
 
     @Override
@@ -70,6 +79,15 @@ class Position {
             return Arrays.equals(value, ((Position) obj).value)
                     && Arrays.equals(limit, ((Position) obj).limit);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int rtn=0;
+        for(int v:value){
+            rtn+=v;
+        }
+        return rtn;
     }
 
     public int getDimension(){

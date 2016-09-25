@@ -7,6 +7,7 @@ package net.alexhyisen.zeta;
 class Node {
     private Node[] neighbors;
     private State state;
+    private Position position;
 
     public Node[] getNeighbors() {
         return neighbors;
