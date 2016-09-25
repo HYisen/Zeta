@@ -224,6 +224,49 @@ class Area {
         return func.getData();
     }
 
+    public String toMeaning(){
+        String rtn="";
+        char id='A';
+        for(int k=0;k<node.getDimension();++k)
+        {
+            //bs = binary String
+            char[] bs=illustrate(node.getValue(k)).toCharArray();
+            if(size[k]==1){
+                rtn+=(bs[0]=='0'?Character.toLowerCase(id):id);
+                id++;
+                rtn+=(bs[1]=='0'?Character.toLowerCase(id):id);
+                id++;
+            }else if(size[k]==2){
+                if(node.getValue(k)%2==0){
+                    rtn+=(bs[0]=='0'?Character.toLowerCase(id):id);
+                    id+=2;
+                }else{
+                    id++;
+                    rtn+=(bs[1]=='0'?Character.toLowerCase(id):id);
+                    id++;
+                }
+            }else if(size[k]==4){
+                id+=2;
+            }
+        }
+        return rtn;
+    }
+
+    private String illustrate(int value){
+        switch (value){
+            case 0:
+                return "00";
+            case 1:
+                return "01";
+            case 2:
+                return "11";
+            case 3:
+                return "10";
+            default:
+                throw new RuntimeException("fail to illustrate");
+        }
+    }
+
     public static void main(String[] args){
         Data data=Data.generateRandom(4,4);
         Area area=new Area(data,new Position(new int[]{0,0},new int[]{3,3}));

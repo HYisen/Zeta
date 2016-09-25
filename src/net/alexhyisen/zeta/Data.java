@@ -8,6 +8,7 @@ import java.util.*;
 public class Data {
     private Map<Position,State> data=new HashMap<>();
     private int[] size;
+    private Set<Area> limbs=null;
 
     public Data(Map<Position, State> data, int[] size) {
         this.data = data;
@@ -76,26 +77,63 @@ public class Data {
         return size;
     }
 
-    public Area[] search(){
-        Set<Area> rtn=new HashSet<>();
-        Area whole=new Area(this,new Position(new int[]{0,0},new int[]{size[0]-1,size[1]-1}),size);
-        for(Position p:whole.getMembers()){
-            Area a=new Area(this,p);
-            if(a.getState().equals(State.POSITIVE)){
-                for(Area unit:a.expandMost()){
-                    rtn.add(unit);
+    //search() find every area with furthest expansion
+    public Set<Area> search(){
+        if(limbs==null){
+            limbs=new HashSet<>();
+            Area whole=new Area(this,new Position(new int[]{0,0},new int[]{size[0]-1,size[1]-1}),size);
+            for(Position p:whole.getMembers()){
+                Area a=new Area(this,p);
+                if(a.getState().equals(State.POSITIVE)){
+                    for(Area unit:a.expandMost()){
+                        limbs.add(unit);
+                    }
                 }
             }
         }
-        return rtn.toArray(new Area[rtn.size()]);
+        return limbs;
+    }
+
+    //simplify() try to remove the redundant Area
+    public Set<Area> simplify(){
+        Set<Area> rtn=new HashSet<>(limbs);
+
+        Set<Position> ps=new HashSet<>();
+        for(Area a:rtn){
+            ps.addAll(a.getMembers());
+        }
+
+        do{
+            boolean isWorked=false;
+            Set<Area> temp=new HashSet<>(rtn);
+            for(Area leaf:rtn){
+                temp.addAll(rtn);
+                Set<Position> cps=new HashSet<>(ps);
+                temp.remove(leaf);
+                for(Area area:temp){
+                    cps.removeAll(area.getMembers());
+                }
+                if(cps.isEmpty()){
+                    //System.out.println("remove "+leaf);
+                    isWorked=true;
+                    break;
+                }
+            }
+            if (isWorked){
+                rtn=new HashSet<>(temp);
+            }else{
+                break;
+            }
+        }while (true);
+
+        return rtn;
     }
 
     public static void main(String[] args){
         //Data data=Data.generateSimple(new int[][]{{1,0},{1,1}});
         Data data=Data.generateRandom(4,4);
         data.print();
-        for(Area one:data.search()){
-            System.out.println(one);
-        }
+
+        data.search().forEach(System.out::println);
     }
 }

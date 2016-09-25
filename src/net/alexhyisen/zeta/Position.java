@@ -19,6 +19,10 @@ class Position {
         //using deep copy to allow multiple use of source
     }
 
+    public int getValue(int dimension) {
+        return value[dimension];
+    }
+
     //if the limit is't defined, will throw UnsupportedOperationException where it's needed
     public Position(int[] value) {
         this.value = value.clone();
