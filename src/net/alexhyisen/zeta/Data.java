@@ -64,7 +64,7 @@ public class Data {
             for(int i=0;i!=size[0];++i){
                 String str="";
                 for (int j=0;j!=size[1];++j){
-                    int[] value={i,j};
+                    int[] value={j,i};
                     Position p=new Position(value,limit);
                     str+=p+"="+get(p)+"\t";
                 }

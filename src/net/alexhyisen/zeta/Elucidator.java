@@ -118,7 +118,7 @@ public class Elucidator {
         //String input="00,01,11,0x";
         //Data data=Data.generateSimple(elucidate(input));
 
-        String input="Ab+ABc+aB+abC ";
+        String input="AC+ba+bC+aD+CD ";
         Data data=Data.generateSimple(illustrate(input,4));
 
         data.print();
