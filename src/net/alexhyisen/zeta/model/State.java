@@ -1,7 +1,5 @@
-package net.alexhyisen.zeta;
+package net.alexhyisen.zeta.model;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 /**

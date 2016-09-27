@@ -1,4 +1,4 @@
-package net.alexhyisen.zeta;
+package net.alexhyisen.zeta.model;
 
 import java.util.Arrays;
 

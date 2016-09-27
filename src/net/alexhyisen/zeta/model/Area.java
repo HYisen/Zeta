@@ -1,4 +1,4 @@
-package net.alexhyisen.zeta;
+package net.alexhyisen.zeta.model;
 
 import java.util.*;
 
@@ -7,7 +7,7 @@ import java.util.*;
  * Area is something that all of the Node it included have a same state and expands when simplifying.
  * node is the left-up position of all the members
  */
-class Area {
+public class Area {
     private Data data;
     private Position node;
     private int[] size;
