@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Well, seek() will return a new Position while move() return itself,
  * which means whether the caller changes or not.
  */
-class Position {
+public class Position {
     private int[] value;
     private int[] limit;
 
