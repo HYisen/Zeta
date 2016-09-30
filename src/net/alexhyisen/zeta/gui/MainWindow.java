@@ -17,9 +17,10 @@ public class MainWindow extends JFrame{
     private Data data=Data.generateRandom(4,4);
     private Set<Area> areas=data.search();
     private Area[] result=areas.toArray(new Area[areas.size()]);
-    private InputPanel ip=new InputPanel(this);
-    private ResultPanel rp=new ResultPanel(this);
-    private BoardPanel bp=new BoardPanel(this);
+
+    InputPanel ip=new InputPanel(this);
+    ResultPanel rp=new ResultPanel(this);
+    BoardPanel bp=new BoardPanel(this);
 
     public MainWindow() throws HeadlessException {
         add(BorderLayout.NORTH,ip);

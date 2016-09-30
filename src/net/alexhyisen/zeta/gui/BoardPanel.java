@@ -29,7 +29,18 @@ public class BoardPanel extends JPanel {
         for(int k=0;k!=16;k++){
             Position p=new Position(new int[]{k%4,k/4},new int[]{3,3});
             nodes[k].setMsg(p.toString()+parent.getData().get(p));
+            nodes[k].setValue(parent.getData().get(p));
             nodes[k].refresh();
+        }
+    }
+
+    public void setSelected(int index,boolean value){
+        nodes[index].setSelected(value);
+    }
+
+    public void resetSelected(){
+        for(Node node:nodes){
+            node.setSelected(false);
         }
     }
 }

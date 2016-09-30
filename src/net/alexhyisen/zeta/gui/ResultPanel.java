@@ -1,6 +1,7 @@
 package net.alexhyisen.zeta.gui;
 
 import net.alexhyisen.zeta.model.Area;
+import net.alexhyisen.zeta.model.Position;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -45,8 +46,12 @@ public class ResultPanel extends JPanel{
 
     public void report(){
         java.util.List<Area> selected=list.getSelectedValuesList();
+        parent.bp.resetSelected();
         for(Area a:selected){
             System.out.println("selected "+a);
+            for(Position p:a.getMembers()){
+                parent.bp.setSelected(p.getValue(0)+4*p.getValue(1),true);
+            }
         }
         System.out.println("end");
     }
