@@ -37,7 +37,7 @@ public class ResultPanel extends JPanel{
             repaint();
             //System.out.println("remove list");
         }
-        list=new JList<>(parent.getResult());
+        list=new JList<>(AreaAdapter.adapt(parent.getResult()));
         add(list);
         list.addListSelectionListener(lsl);
         validate();
@@ -48,11 +48,11 @@ public class ResultPanel extends JPanel{
         java.util.List<Area> selected=list.getSelectedValuesList();
         parent.bp.resetSelected();
         for(Area a:selected){
-            System.out.println("selected "+a);
+            //System.out.println("selected "+a);
             for(Position p:a.getMembers()){
                 parent.bp.setSelected(p.getValue(0)+4*p.getValue(1),true);
             }
         }
-        System.out.println("end");
+        //System.out.println("end");
     }
 }

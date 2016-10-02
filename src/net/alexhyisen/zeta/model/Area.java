@@ -22,6 +22,21 @@ public class Area {
         state=data.get(node);
     }
 
+    //The following getter is created to support AreaAdapter.
+    //Why not using combination? Because I don't what to write a copy constructor or use a instructor.
+
+    public Data getData() {
+        return data;
+    }
+
+    public Position getNode() {
+        return node;
+    }
+
+    public int[] getSize() {
+        return size;
+    }
+
     private void setState(){
         Function<Position,State> func=new Function<Position, State>() {
             private State state=State.DONTCARE;

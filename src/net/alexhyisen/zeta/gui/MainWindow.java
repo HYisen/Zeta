@@ -29,12 +29,12 @@ public class MainWindow extends JFrame{
     }
 
     public void input(String orig){
-        System.out.println("get input "+orig);
+        //System.out.println("get input "+orig);
         data= Data.generateSimple(Elucidator.illustrate(orig,4));
         areas=data.search();
         result=areas.toArray(new Area[areas.size()]);
         rp.refresh();
-        System.out.println("dealt"+result[0]);
+        //System.out.println("dealt"+result[0]);
         bp.refresh();
     }
 

@@ -40,7 +40,7 @@ public class Node extends JPanel {
         super.paintComponent(g);
         if(isSelected){
             Color c=g.getColor();
-            g.setColor(Color.GRAY);
+            g.setColor(Color.LIGHT_GRAY);
             g.fillRect(0,0,getWidth(),getHeight());
             g.setColor(c);
         }
@@ -69,9 +69,9 @@ public class Node extends JPanel {
 
     private void draw(int style,Graphics g){
         if(style==0){
-            g.drawOval(getWidth()/3,getHeight()/3,getWidth()/3,getHeight()/3);
+            g.drawOval(3*getWidth()/8,3*getHeight()/8,getWidth()/4,getHeight()/4);
         }else if(style==1){
-            g.drawLine(getWidth()/2,getHeight()/4,getWidth()/2,3*getWidth()/4);
+            g.drawLine(getWidth()/2,getHeight()/3,getWidth()/2,2*getWidth()/3);
         }
     }
 
@@ -80,12 +80,14 @@ public class Node extends JPanel {
     }
 
     private void drawBorders(Graphics g){
+        Color c=g.getColor();
+        g.setColor(Color.GRAY);
         for(BorderLine b:borders){
             int[] values=new int[]{
                     (100-b.radius)*getWidth()/200,
                     (100-b.radius)*getHeight()/200,
                     b.radius*getWidth()/100,
-                    b.radius*getHeight()/100};;
+                    b.radius*getHeight()/100};
             for(int k=0;k!=4;++k){
                 switch (b.types[k]) {
                     case QUADRANT:
@@ -126,6 +128,7 @@ public class Node extends JPanel {
                 }
             }
         }
+        g.setColor(c);
     }
 
 }
