@@ -8,4 +8,5 @@ public enum BorderType {
     QUADRANT,
     HORIZONTAL,
     VERTICAL,
+    EMPTY,
 }

@@ -58,6 +58,7 @@ public class Node extends JPanel {
             case MULTIPLE:
                 break;
         }
+        //g.drawArc(0,0,getWidth(),getHeight(),0,45);
         drawBorders(g);
     }
 
@@ -81,19 +82,19 @@ public class Node extends JPanel {
     private void drawBorders(Graphics g){
         for(BorderLine b:borders){
             int[] values=new int[]{
-                    (100-b.radius)*getWidth()/100,
-                    (100-b.radius)*getHeight()/100,
+                    (100-b.radius)*getWidth()/200,
+                    (100-b.radius)*getHeight()/200,
                     b.radius*getWidth()/100,
                     b.radius*getHeight()/100};;
             for(int k=0;k!=4;++k){
                 switch (b.types[k]) {
                     case QUADRANT:
-                        g.drawArc(values[0],values[1],values[2],values[3],k*90,(k+1)*90);
+                        g.drawArc(values[0],values[1],values[2],values[3],90-90*k,-90);
                         break;
                     case HORIZONTAL:
                         switch (k){
                             case 0:
-                                g.drawLine(getWidth()/2,values[1],getWidth(),values[2]);
+                                g.drawLine(getWidth()/2,values[1],getWidth(),values[1]);
                                 break;
                             case 1:
                                 g.drawLine(getWidth()/2,getHeight()-values[1],getWidth(),getHeight()-values[1]);
