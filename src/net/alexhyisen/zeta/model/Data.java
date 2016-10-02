@@ -4,13 +4,14 @@ import java.util.*;
 
 /**
  * Created by Alex on 2016/9/25.
+ * Data is data.
  */
 public class Data {
     private Map<Position,State> data=new HashMap<>();
     private int[] size;
     private Set<Area> limbs=null;
 
-    public Data(Map<Position, State> data, int[] size) {
+    private Data(Map<Position, State> data, int[] size) {
         this.data = data;
         this.size = size;
     }
@@ -22,7 +23,6 @@ public class Data {
     public static Data generateRandom(int row,int col){
         Map<Position,State> data=new HashMap<>();
         int[] limit={row-1,col-1};
-        Random rand=new Random();
         for(int i=0;i!=row;++i){
             for(int j=0;j!=col;++j){
                 int[] value={i,j};
