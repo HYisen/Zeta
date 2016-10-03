@@ -56,7 +56,7 @@ public class BoardPanel extends JPanel {
         int count=0;
         for(Area a:parent.getData().simplify()){
             int r=80-10*(++count);
-            Set<Position> members=a.getMembers();
+            Set<Position> members=a.getPosMembers();
             for(Position p:members){
                 Set<BorderLine> target=rtn.get(p.getValue(0)+4*p.getValue(1));
                 BitSet link=new BitSet(4);

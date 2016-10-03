@@ -1,6 +1,7 @@
 package net.alexhyisen.zeta.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Alex on 2016/9/23.
@@ -210,21 +211,18 @@ public class Area {
     @Override
     public boolean equals(Object obj) {
         if(obj.getClass().equals(getClass())){
-            return getMembers().equals(((Area)obj).getMembers());
+            return getPosMembers().equals(((Area)obj).getPosMembers());
         }else{
             return false;
         }
     }
 
-    public Set<Position> getMembers(){
+    public Set<Position> getAllMembers(){//get all members, regarding whether it's positive or dontcare
         Function<Position,Set<Position>> func=new Function<Position,Set<Position>>() {
             private Set<Position> rtn=new HashSet<>();
             @Override
             public void process(Position orig) {
-                //to skip the DONTCARE member
-                if(data.get(orig).equals(State.POSITIVE)){
-                    rtn.add(orig);
-                }
+                rtn.add(orig);
             }
 
             @Override
@@ -238,9 +236,14 @@ public class Area {
         for(Position p:func.getData()){
             System.out.print(p);
         }
-        System.out.println("getMembers()");
+        System.out.println("getPosMembers()");
         */
         return func.getData();
+    }
+
+    public Set<Position> getPosMembers(){//get positive members
+        Set<Position> rtn= getAllMembers().stream().filter(p -> data.get(p).equals(State.POSITIVE)).collect(Collectors.toSet());
+        return rtn;
     }
 
     public String toMeaning(){

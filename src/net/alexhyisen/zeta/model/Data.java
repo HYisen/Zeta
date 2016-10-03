@@ -105,7 +105,7 @@ public class Data {
         if(limbs==null){
             limbs=new HashSet<>();
             Area whole=new Area(this,new Position(new int[]{0,0},new int[]{size[0]-1,size[1]-1}),size);
-            for(Position p:whole.getMembers()){
+            for(Position p:whole.getPosMembers()){
                 Area a=new Area(this,p);
                 if(a.getState().equals(State.POSITIVE)){
                     for(Area unit:a.expandMost()){
@@ -123,7 +123,7 @@ public class Data {
 
         Set<Position> ps=new HashSet<>();
         for(Area a:rtn){
-            ps.addAll(a.getMembers());
+            ps.addAll(a.getPosMembers());
         }
 
         do{
@@ -134,7 +134,7 @@ public class Data {
                 Set<Position> cps=new HashSet<>(ps);
                 temp.remove(leaf);
                 for(Area area:temp){
-                    cps.removeAll(area.getMembers());
+                    cps.removeAll(area.getPosMembers());
                 }
                 if(cps.isEmpty()){
                     //System.out.println("remove "+leaf);

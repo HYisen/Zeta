@@ -7,9 +7,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.*;
 
 /**
  * Created by Alex on 2016/9/27.
@@ -49,7 +46,7 @@ public class ResultPanel extends JPanel{
         parent.bp.resetSelected();
         for(Area a:selected){
             //System.out.println("selected "+a);
-            for(Position p:a.getMembers()){
+            for(Position p:a.getAllMembers()){
                 parent.bp.setSelected(p.getValue(0)+4*p.getValue(1),true);
             }
         }
