@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * InputPanel is where to acquire the input message.
  */
 public class InputPanel extends JPanel{
-    private JTextArea inputTextArea=new JTextArea(1,40);
+    private JTextArea inputTextArea[]=new JTextArea[]{new JTextArea(1,20),new JTextArea(1,20)};
     private JButton submitButton=new JButton("GO");
     private MainWindow parent;
 
@@ -22,14 +22,18 @@ public class InputPanel extends JPanel{
     }
 
     private void init(){
+        setLayout(new FlowLayout());
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("Clicked ");
-                parent.input(inputTextArea.getText());
+                parent.input(new String[]{inputTextArea[0].getText(),inputTextArea[1].getText()});
             }
         });
-        add(BorderLayout.CENTER,inputTextArea);
-        add(BorderLayout.EAST,submitButton);
+        add(new JLabel("Positives"));
+        add(inputTextArea[0]);
+        add(new JLabel("Don'tcare"));
+        add(inputTextArea[1]);
+        add(submitButton);
     }
 }

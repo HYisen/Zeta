@@ -56,6 +56,29 @@ public class Data {
         return new Data(data,limit);
     }
 
+    public static Data generateNormal(int[][] positives,int [][] dontcares){
+        //Actually, I want to use the name generateStandard, but gS is already used by generateSimple.
+        Map<Position,State> data=new HashMap<>();
+        int row=positives.length;
+        int col=positives[0].length;
+        int[] limit={row-1,col-1};
+        for(int i=0;i!=row;++i){
+            for(int j=0;j!=col;++j){
+                int[] value={i,j};
+                State state=State.DONTCARE;
+                if(positives[i][j]==1){
+                    state=State.POSITIVE;
+                }else if(dontcares[i][j]!=1){
+                    state=State.NEGATIVE;
+                }
+                data.put(new Position(value,limit),state);
+            }
+        }
+        limit[0]++;
+        limit[1]++;
+        return new Data(data,limit);
+    }
+
     public void print(){
         if(size.length!=2){
             System.out.println("Not 2-Dimension Data");
@@ -96,7 +119,7 @@ public class Data {
 
     //simplify() try to remove the redundant Area
     public Set<Area> simplify(){
-        Set<Area> rtn=new HashSet<>(limbs);
+        Set<Area> rtn=new HashSet<>(search());
 
         Set<Position> ps=new HashSet<>();
         for(Area a:rtn){

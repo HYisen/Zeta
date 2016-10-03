@@ -118,8 +118,12 @@ public class Elucidator {
         //String input="00,01,11,0x";
         //Data data=Data.generateSimple(elucidate(input));
 
-        String input="AC+ba+bC+aD+CD ";
-        Data data=Data.generateSimple(illustrate(input,4));
+        //String input="AC+ba+bC+aD+CD ";
+        //Data data=Data.generateSimple(illustrate(input,4));
+
+        String[] orig=new String[]{"abcd","a"};
+        Data data=Data.generateNormal(Elucidator.illustrate(orig[0],4),
+                Elucidator.illustrate(orig[1],4));
 
         data.print();
         for(Area area:data.search()){

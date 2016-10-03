@@ -133,7 +133,8 @@ public class Area {
 
     private Area tryMerge(int axis,int step){
         //to forced the word success and fail to have a same length is hard
-        if(getState().equals(seek(axis,step).getState())){
+        State target=seek(axis,step).getState();
+        if(getState().equals(target)||target.equals(State.DONTCARE)){
             //System.out.println("succeed to merge "+this+" to "+seek(axis,step));
             return merge(axis,step);
         }else{
@@ -220,7 +221,10 @@ public class Area {
             private Set<Position> rtn=new HashSet<>();
             @Override
             public void process(Position orig) {
-                rtn.add(orig);
+                //to skip the DONTCARE member
+                if(data.get(orig).equals(State.POSITIVE)){
+                    rtn.add(orig);
+                }
             }
 
             @Override

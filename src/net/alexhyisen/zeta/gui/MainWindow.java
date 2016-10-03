@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class MainWindow extends JFrame{
     private Data data=Data.generateRandom(4,4);
-    private Set<Area> areas=data.search();
+    private Set<Area> areas=data.simplify();
     private Area[] result=areas.toArray(new Area[areas.size()]);
 
     InputPanel ip=new InputPanel(this);
@@ -28,10 +28,15 @@ public class MainWindow extends JFrame{
         add(BorderLayout.CENTER,bp);
     }
 
-    public void input(String orig){
+    public void input(String[] orig){
         //System.out.println("get input "+orig);
-        data= Data.generateSimple(Elucidator.illustrate(orig,4));
-        areas=data.search();
+        if(orig[1].isEmpty()){
+            data= Data.generateSimple(Elucidator.illustrate(orig[0],4));
+        }else{
+            data=Data.generateNormal(Elucidator.illustrate(orig[0],4),
+                    Elucidator.illustrate(orig[1],4));
+        }
+        areas=data.simplify();
         result=areas.toArray(new Area[areas.size()]);
         rp.refresh();
         //System.out.println("dealt"+result[0]);
